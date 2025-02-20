@@ -1,0 +1,88 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  padding: 0;
+  background-color: #f4f4f4;
+  min-width: 100%;
+  min-height: auto;
+}
+.container-list {
+  position: relative;
+  width: 100vh;
+  height: 100vh;
+  min-width: 80%;
+}
+.container-list h1 {
+  text-align: center;
+  margin-top: 2.2%;
+}
+
+.add-button {
+  position: absolute;
+  display: block;
+  width: max-content;
+  margin: 10px auto;
+  padding: 10px 15px;
+  text-decoration: none;
+  background-color: #28a745;
+  color: white;
+  border-radius: 5px;
+  left: 85%;
+}
+
+table {
+  width: 100%;
+  margin: auto;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center !important;
+}
+
+th {
+  background-color: #007bff;
+  color: white;
+}
+
+th:last-child,
+td:last-child {
+  width: 180px;
+  white-space: nowrap;
+}
+
+button {
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 2px;
+}
+
+button.edit {
+  background-color: #ffc107;
+}
+
+button.delete {
+  background-color: #dc3545;
+  color: white;
+}
+
+button.map {
+  background-color: #17a2b8;
+  color: white;
+}
+
+#msg-vazia {
+  text-align: center;
+  font-style: italic;
+  font-size: 16px;
+  font-weight: bold;
+  color: #777;
+  padding: 10px;
+}
