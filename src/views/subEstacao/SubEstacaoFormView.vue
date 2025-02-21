@@ -6,13 +6,7 @@
       <div class="form-grid">
         <div class="input-group">
           <label for="codigo">Código</label>
-          <input
-            id="codigo"
-            class="input-form"
-            v-model="novaSubestacao.codigo"
-            placeholder="Código"
-            maxlength="3"
-          />
+          <input id="codigo" class="input-form" v-model="novaSubestacao.codigo" placeholder="Código" maxlength="3" />
         </div>
         <div class="input-group">
           <label for="nome">Nome</label>
@@ -20,23 +14,13 @@
         </div>
         <div class="input-group">
           <label for="latitude">Latitude</label>
-          <input
-            id="latitude"
-            class="input-form"
-            v-model="novaSubestacao.latitude"
-            placeholder="Latitude"
-            type="number"
-          />
+          <input id="latitude" class="input-form" v-model="novaSubestacao.latitude" placeholder="Latitude"
+            type="number" />
         </div>
         <div class="input-group">
           <label for="longitude">Longitude</label>
-          <input
-            id="longitude"
-            class="input-form"
-            v-model="novaSubestacao.longitude"
-            placeholder="Longitude"
-            type="number"
-          />
+          <input id="longitude" class="input-form" v-model="novaSubestacao.longitude" placeholder="Longitude"
+            type="number" />
         </div>
       </div>
     </div>
@@ -46,17 +30,15 @@
       <div class="form-grid">
         <div class="input-group">
           <label for="codigo-rede">Código</label>
-          <input
-            id="codigo-rede"
-            class="input-form"
-            v-model="rede.codigo"
-            placeholder="Código"
-            maxlength="5"
-          />
+          <input id="codigo-rede" class="input-form" v-model="rede.codigo" placeholder="Código" maxlength="5" />
         </div>
         <div class="input-group">
           <label for="nome-rede">Nome</label>
           <input id="nome-rede" class="input-form" v-model="rede.nome" placeholder="Nome" />
+        </div>
+        <div class="input-group">
+          <label for="tensao-rede">Tensão (kV)</label>
+          <input id="tensao-rede" class="input-form" v-model="rede.tensao" placeholder="Tensão" type="number" />
         </div>
         <button class="btn-add" @click="adicionarRede">Adicionar</button>
       </div>
@@ -68,16 +50,18 @@
             <tr>
               <th>Código</th>
               <th>Nome</th>
+              <th>Tensão (kV)</th>
               <th>Ações</th>
             </tr>
           </thead>
           <tbody>
             <tr v-if="redes.length === 0">
-              <td colspan="3" class="mensagem-vazia">Nenhuma rede adicionada</td>
+              <td colspan="4" class="mensagem-vazia">Nenhuma rede adicionada</td>
             </tr>
             <tr v-for="(r, index) in redes" :key="index">
               <td>{{ r.codigo }}</td>
               <td>{{ r.nome }}</td>
+              <td>{{ r.tensao }}</td>
               <td>
                 <button class="btn-excluir" @click="removerRede(index)">Excluir</button>
               </td>
@@ -115,18 +99,20 @@ const novaSubestacao = ref({
 const rede = ref({
   codigo: '',
   nome: '',
+  tensao: '',
 })
 
 const redes = ref([])
 
 const adicionarRede = () => {
-  if (!rede.value.codigo || !rede.value.nome) {
+  if (!rede.value.codigo || !rede.value.nome || !rede.value.tensao) {
     toast.error('Preencha todos os campos para adicionar uma rede!')
     return
   }
   redes.value.push({ ...rede.value })
   rede.value.codigo = ''
   rede.value.nome = ''
+  rede.value.tensao = ''
   toast.success('Rede adicionada com sucesso!')
 }
 

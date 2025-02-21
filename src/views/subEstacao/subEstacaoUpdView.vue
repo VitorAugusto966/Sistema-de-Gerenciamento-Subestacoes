@@ -4,26 +4,10 @@
     <div class="form-section-upd">
       <h3>SubEstação - Alteração</h3>
       <div class="form-grid-upd">
-        <input
-          class="input-form"
-          v-model="subestacao.codigo"
-          placeholder="Código"
-          maxlength="3"
-          disabled
-        />
+        <input class="input-form" v-model="subestacao.codigo" placeholder="Código" maxlength="3" disabled />
         <input class="input-form" v-model="subestacao.nome" placeholder="Nome" />
-        <input
-          class="input-form"
-          v-model="subestacao.latitude"
-          placeholder="Latitude"
-          type="number"
-        />
-        <input
-          class="input-form"
-          v-model="subestacao.longitude"
-          placeholder="Longitude"
-          type="number"
-        />
+        <input class="input-form" v-model="subestacao.latitude" placeholder="Latitude" type="number" />
+        <input class="input-form" v-model="subestacao.longitude" placeholder="Longitude" type="number" />
       </div>
     </div>
     <div class="form-section-upd">
@@ -31,6 +15,7 @@
       <div class="form-grid-upd">
         <input class="input-form" v-model="rede.codigo" placeholder="Código" maxlength="5" />
         <input class="input-form" v-model="rede.nome" placeholder="Nome" />
+        <input class="input-form" v-model="rede.tensaoNominal" placeholder="Tensão" />
         <button class="btn-add" @click="adicionarRede">Adicionar</button>
       </div>
 
@@ -41,6 +26,7 @@
             <tr>
               <th>Código</th>
               <th>Nome</th>
+              <th>Tensão</th>
               <th>Ações</th>
             </tr>
           </thead>
@@ -51,19 +37,15 @@
             <tr v-for="(r, index) in redes" :key="index">
               <td>{{ r.codigo }}</td>
               <td>
-                <input
-                  v-if="editandoIndex === index"
-                  v-model="redeEditando.nome"
-                  class="input-form"
-                />
+                <input v-if="editandoIndex === index" v-model="redeEditando.nome" class="input-edit" />
                 <span v-else>{{ r.nome }}</span>
               </td>
               <td>
-                <button
-                  class="btn-editar"
-                  v-if="editandoIndex === index"
-                  @click="salvarEdicao(index)"
-                >
+                <input v-if="editandoIndex === index" v-model="redeEditando.tensaoNominal" class="input-edit" />
+                <span v-else>{{ r.tensaoNominal }}</span>
+              </td>
+              <td>
+                <button class="btn-editar" v-if="editandoIndex === index" @click="salvarEdicao(index)">
                   Salvar
                 </button>
                 <button class="btn-editar" v-else @click="alterarRede(index)">Alterar</button>
@@ -114,6 +96,7 @@ onMounted(() => {
 const rede = ref({
   codigo: '',
   nome: '',
+  tensaoNominal: '',
 })
 
 const adicionarRede = () => {
@@ -121,6 +104,7 @@ const adicionarRede = () => {
     redes.value.push({ ...rede.value })
     rede.value.codigo = ''
     rede.value.nome = ''
+    rede.value.tensaoNominal = ''
     toast.success('Rede adicionada com sucesso!')
   } else {
     toast.error('Preencha todos os campos!')
@@ -138,11 +122,13 @@ const removerRede = (index) => {
 
 const alterarRede = (index) => {
   editandoIndex.value = index
-  redeEditando.value = { nome: redes.value[index].nome }
+  redeEditando.value = { nome: redes.value[index].nome, tensaoNominal: redes.value[index].tensaoNominal }
+
 }
 
 const salvarEdicao = (index) => {
   redes.value[index].nome = redeEditando.value.nome
+  redes.value[index].tensaoNominal = redeEditando.value.tensaoNominal
   editandoIndex.value = null
   toast.success('Rede alterada com sucesso!')
 }

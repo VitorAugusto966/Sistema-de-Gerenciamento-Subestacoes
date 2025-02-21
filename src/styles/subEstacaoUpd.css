@@ -89,6 +89,9 @@ h3 {
 .btn-add:hover {
   background-color: #218838;
 }
+.btn-editar:hover {
+  background-color: yellow;
+}
 
 .btn-cancelar {
   background-color: #dc3545;
@@ -163,4 +166,9 @@ th {
 
 .btn-excluir:hover {
   background-color: darkred;
+}
+
+.input-edit {
+  text-align: center;
+  width: auto;
 }
