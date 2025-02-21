@@ -12,18 +12,26 @@ import 'leaflet/dist/leaflet.css'
 import Header from '@/components/Header.vue'
 
 const subestacoes = ref([])
+let map = null
 
-onMounted(async () => {
+onMounted(() => {
+  document.title = 'Mapa de SubEstações'
+
+  map = L.map('map').setView([-23.5505, -46.6333], 10)
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors',
+  }).addTo(map)
+
+  carregarSubestacoes()
+})
+
+const carregarSubestacoes = async () => {
   try {
     const response = await fetch('http://localhost:9099/subEstacao')
     if (!response.ok) throw new Error('Erro ao buscar subestações')
+
     subestacoes.value = await response.json()
-
-    const map = L.map('map').setView([-23.5505, -46.6333], 10)
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors',
-    }).addTo(map)
 
     subestacoes.value.forEach((estacao) => {
       if (estacao.latitude && estacao.longitude) {
@@ -33,13 +41,9 @@ onMounted(async () => {
       }
     })
   } catch (error) {
-    console.error(error)
+    console.error('⚠️ Erro ao carregar subestações:', error)
   }
-})
-
-onMounted(() => {
-  document.title = 'Mapa de SubEstações'
-})
+}
 </script>
 
 <style scoped>
