@@ -2,6 +2,9 @@
 
 Este projeto é um sistema completo para cadastro, edição, listagem e exclusão de subestações elétricas, incluindo redes de média tensão. O sistema foi desenvolvido como parte de um **teste técnico** e utiliza **Spring Boot** no backend e **Vue.js** no frontend, com **Leaflet** para exibição das subestações em um mapa interativo.
 
+🔗 **Acesse o sistema online:** [Substation Manager](https://substation-manager.netlify.app/)  
+🚀 **Não é necessário e-mail e senha para acessar o sistema.**
+
 ## 🚀 Tecnologias Utilizadas
 
 ### 🔙 Backend
